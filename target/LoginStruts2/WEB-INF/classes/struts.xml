@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+
+    <package name="rest" abstract="true" />
+
+    <package name="api" extends="json-default" namespace="/api">
+        <!-- Define action -->
+     <action name="createUser" class="Controller.LoginController" method="initializeConnection">
+    <interceptor-ref name="defaultStack"/>
+    <result name="success" type="json"/>
+    <result name="input" type="json"/>
+    <result name="error" type="json">
+        <!-- Define error message here -->
+        <param name="statusCode">400</param> <!-- HTTP status code for bad request -->
+        <param name="errorMessage">Invalid content type. Expected application/json.</param>
+    </result>
+</action>
+
+
+         <action name="getAllUsers" class="Controller.GetController" method="getAllUsers">
+            <result name="success" type="json"/>
+            <result name="input" type="json"/>
+        </action>
+
+           <action name="editUser" class="Controller.EditController" method="editUser">
+            <result name="success" type="json"/>
+            <result name="input" type="json"/>
+        </action>
+ <action name="deleteUser" class="Controller.DeleteController" method="deleteUser">
+            <result name="success" type="json"/>
+            <result name="input" type="json"/>
+        </action>
+
+    </package> 
+</struts>
